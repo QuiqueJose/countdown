@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cuenta regresiva</title>
+
+    <style>
+      body {
+        margin: 0;
+        background: transparent;
+        font-family: "Montserrat", Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .countdown {
+        display: flex;
+        gap: 16px;
+        text-align: center;
+        color: #5a2d82;
+      }
+
+      .time-box {
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 12px;
+        padding: 12px 16px;
+        min-width: 70px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .number {
+        font-size: 32px;
+        font-weight: 600;
+      }
+
+      .label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      @media (max-width: 600px) {
+        .number {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="countdown">
+      <div class="time-box">
+        <div class="number" id="days">0</div>
+        <div class="label">Días</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="hours">0</div>
+        <div class="label">Horas</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="minutes">0</div>
+        <div class="label">Min</div>
+      </div>
+      <div class="time-box">
+        <div class="number" id="seconds">0</div>
+        <div class="label">Seg</div>
+      </div>
+    </div>
+
+    <script>
+      const eventDate = new Date("2026-06-27T21:00:00-03:00").getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const diff = eventDate - now;
+
+        if (diff <= 0) {
+          document.querySelector(".countdown").innerHTML =
+            "<strong>¡Hoy es el gran día!</strong>";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById("days").textContent = days;
+        document.getElementById("hours").textContent = hours;
+        document.getElementById("minutes").textContent = minutes;
+        document.getElementById("seconds").textContent = seconds;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    </script>
+  </body>
+</html>
