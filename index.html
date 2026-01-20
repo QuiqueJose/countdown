@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -17,11 +17,16 @@
 
       .countdown {
         display: flex;
-        gap: 16px;
-        text-align: center;
-        color: #5a2d82;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap; /* 🔥 CLAVE */
+        padding: 0 16px;
       }
 
+      .countdown-item {
+        flex: 1 1 45%; /* 2 por fila en mobile */
+        max-width: 160px;
+      }
       .time-box {
         background: rgba(255, 255, 255, 0.85);
         border-radius: 12px;
@@ -44,6 +49,13 @@
       @media (max-width: 600px) {
         .number {
           font-size: 24px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .countdown-item {
+          flex: 1 1 100%; /* 1 por fila si hace falta */
+          max-width: none;
         }
       }
     </style>
